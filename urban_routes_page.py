@@ -26,7 +26,9 @@ class UrbanRoutesPage:
     driver_message_label = (By.XPATH, "//label[@for='comment']")
     switch_button_tissues_blanket = (By.CLASS_NAME, "switch")
     button_ice_cream = (By.CLASS_NAME, "counter-plus")
+    ice_cream_counter = (By.CLASS_NAME, "counter-value")
     button_request_taxi = (By.CLASS_NAME, "smart-button-wrapper")
+    sucess_request_taxi = (By.CLASS_NAME, "order-header-title")
 
 
     def __init__(self, driver):
@@ -146,6 +148,12 @@ class UrbanRoutesPage:
             EC.element_to_be_clickable(self.button_add_in_popup_window)
         ).click()
 
+    def card_is_added(self):
+        payment_method_text_xpath = "//div[@class='pp-value-text' and text()='Tarjeta']"
+        return WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, payment_method_text_xpath))
+        )
+
     def get_button_close_add_payment_window(self):  # Código para obtener el botón "Cerrar" de la ventana para agregar el metodo de pago
         return self.driver.find_element(*self.button_close_add_payment_window)
 
@@ -170,6 +178,10 @@ class UrbanRoutesPage:
     def write_message_to_driver_field(self): #Escribir mensaje al conductor
         self.get_message_to_driver_field().send_keys(data.message_for_driver)
 
+    def get_message_value(self): #Obtener el valor del campo de texto después de escribir el mensaje
+        message_field = self.get_message_to_driver_field()
+        return message_field.get_attribute("value")
+
     def get_switch_button_tissue_blanket(self): #Obtener el botón "Mantas y pañuelos"
         return WebDriverWait(self.driver,20).until(
             EC.element_to_be_clickable(self.switch_button_tissues_blanket)
@@ -183,6 +195,17 @@ class UrbanRoutesPage:
             EC.visibility_of_element_located(self.button_ice_cream)
         )
 
+    def get_ice_cream_counter(self): #Obtener el contador de helado
+        return WebDriverWait(self.driver, 20).until(
+            EC.visibility_of_element_located(self.ice_cream_counter)
+        )
+
+    def get_ice_cream_counter_value(self): #Obtener el contenido del contador de helados
+        counter_element = self.get_ice_cream_counter()
+        counter_text = counter_element.text
+        # Convertir el texto (que es un número) a entero
+        return int(counter_text)
+
     def click_on_button_ice_cream(self): #Dar 2 clicks en el botón "+" para pedir 2 helados
         ice_cream = self.get_button_ice_cream()
         ice_cream.click() #Primer click para agregar 1 helado
@@ -195,3 +218,9 @@ class UrbanRoutesPage:
 
     def click_on_button_request_taxi(self): #Dar click en el botón "Reservar un taxi"
         self.get_button_request_taxi().click()
+
+    def get_sucess_request_taxi_popup_window(self): #Ventana de pedido de taxi
+        return WebDriverWait(self.driver,20).until(
+            EC.visibility_of_element_located(self.sucess_request_taxi)
+        )
+
