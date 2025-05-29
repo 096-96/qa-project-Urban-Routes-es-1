@@ -1,4 +1,4 @@
-Karla Elizabeth Muñoz Ugalde, Cohorte 20
+
 
 QA-PROJECT-URBAN-ROUTES-ES
 
@@ -27,16 +27,14 @@ Tecnologías y técnicas utilizadas
 
 Instrucciones para ejecutar las pruebas
 
-1. Clonar el repositorio:
-   git clone https://github.com/Karla-tripleten/qa-project-Urban-Routes-es.git
 
-2. Instalar dependencias:
+ Instalar dependencias:
    -pip
    -Selenium
    -pytest
    -Hay que reiniciar el servidor y colocar en el archivo data.py la nueva URL generada, en la constante urban_routes_url
 
-3. Ejecutar las pruebas
+ Ejecutar las pruebas
 
 - El archivo main.py contiene cada una de las funciones a probar, para ejecutar solo hay que dar click en el icono
 (flecha verde) que se encuentra a lado de cada Test
