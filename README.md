@@ -1,4 +1,4 @@
-Karla Elizabeth Muñoz Ugalde, Cohorte 20
+
 
 QA-PROJECT-URBAN-ROUTES-ES
 
